@@ -9,13 +9,13 @@ most_common() (
         exit 0
     fi
 
-    most_common_bit=$(echo "$lines" | sed -E 's/^([01])[01]+$/\1/g' | sort | uniq -c | sort -h $sort_args | head -1 | awk '{print $2}')
+    most_common_bit=$(echo "$lines" | sed -E 's/^([01])[01]+$/\1/g' | uniq -c | sort -h $sort_args | head -1 | awk '{print $2}')
 
     echo -n $most_common_bit
     echo "$lines" | sed -E -e "/^[^$most_common_bit]/d" -e "s/^$most_common_bit//g" | most_common $sort_args
 )
 
-lines="$(cat)"
+lines="$(cat | sort)"
 
 most_common_bin=$(echo "$lines" | most_common)
 least_common_bin=$(echo "$lines" | most_common -r)
