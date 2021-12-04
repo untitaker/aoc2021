@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 declare -i horizontal=0
 declare -i depth=0
