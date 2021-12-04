@@ -15,9 +15,9 @@ most_common() (
     echo "$lines" | grep -E "^$most_common_bit" | cut -c2- | most_common $sort_args
 )
 
-lines="$(cat | sort)"
+(sort | tee >(most_common 1>&2) | most_common -r) |& (
+    read m1
+    read m2
 
-most_common_bin=$(echo "$lines" | most_common)
-least_common_bin=$(echo "$lines" | most_common -r)
-
-echo "$((2#$most_common_bin * 2#$least_common_bin))"
+    echo $(( 2#$m1 * 2#$m2 ))
+)
