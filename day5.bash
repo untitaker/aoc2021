@@ -28,7 +28,7 @@ expand_line() (
 )
 
 process_result() (
-    cut -d' ' -f2- | sort | uniq -c | grep -vE '^ *1 ' | wc -l | while read line; do
+    cut -d' ' -f2- | sort | uniq -d | wc -l | while read line; do
         echo "$1 $line"
     done
 )
