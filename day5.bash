@@ -1,3 +1,5 @@
+#!/bin/bash
+
 expand_line() (
     x1=$1
     y1=$2
